@@ -39,47 +39,6 @@
       overflow-x: hidden;
     }
 
-    #welding-sparks {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 1;
-      mix-blend-mode: screen;
-    }
-
-    .welding-end-effect {
-      position: relative;
-      height: 220px;
-      margin-top: 0;
-      overflow: hidden;
-      background: transparent;
-      border: 0;
-    }
-
-    .welding-end-effect::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 64%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-      opacity: 0.45;
-      z-index: 0;
-    }
-
-    .welding-end-copy {
-      display: none;
-    }
-
-    .site {
-      position: relative;
-      z-index: 1;
-    }
-
     a {
       color: inherit;
       text-decoration: none;
@@ -87,7 +46,8 @@
 
     button,
     input,
-    textarea {
+    textarea,
+    select {
       font: inherit;
     }
 
@@ -108,6 +68,7 @@
     }
 
     .nav {
+      position: relative;
       min-height: 78px;
       display: flex;
       align-items: center;
@@ -119,6 +80,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
+      flex: 0 0 auto;
     }
 
     .brand-mark {
@@ -153,14 +115,83 @@
       list-style: none;
       color: var(--muted);
       font-size: 0.95rem;
+      align-items: center;
     }
 
     .nav-links a {
+      position: relative;
       transition: color 0.2s ease;
     }
 
     .nav-links a:hover {
       color: white;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width 0.22s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+      flex: 0 0 auto;
+    }
+
+    .language-switcher {
+      height: 46px;
+      min-width: 132px;
+      padding: 0 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .language-switcher:hover,
+    .language-switcher:focus {
+      border-color: rgba(255,145,50,0.28);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .language-switcher option {
+      background: #111115;
+      color: white;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .menu-toggle svg {
+      width: 20px;
+      height: 20px;
     }
 
     .btn {
@@ -174,6 +205,7 @@
       padding: 14px 22px;
       font-weight: 800;
       transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      white-space: nowrap;
     }
 
     .btn:hover {
@@ -237,7 +269,7 @@
       font-weight: 700;
     }
 
-    .eyebrow span {
+    .eyebrow .eyebrow-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
@@ -245,8 +277,17 @@
       box-shadow: 0 0 14px rgba(255,145,50,0.7);
     }
 
+    .hero-line1 {
+      white-space: nowrap;
+    }
+
     .nowrap {
       white-space: nowrap;
+    }
+
+    .jumbotron h2 {
+      text-wrap: balance;
+      overflow-wrap: anywhere;
     }
 
     .jumbotron h2 {
@@ -495,6 +536,47 @@
       resize: vertical;
     }
 
+    #welding-sparks {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 1;
+      mix-blend-mode: screen;
+    }
+
+    .welding-end-effect {
+      position: relative;
+      height: 220px;
+      margin-top: 0;
+      overflow: hidden;
+      background: transparent;
+      border: 0;
+    }
+
+    .welding-end-effect::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 64%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    .welding-end-copy {
+      display: none;
+    }
+
+    .site {
+      position: relative;
+      z-index: 1;
+    }
+
     .footer {
       padding: 26px 0 42px;
       color: var(--muted);
@@ -561,28 +643,119 @@
     }
 
     @media (max-width: 760px) {
-      .welding-end-effect {
-        height: 180px;
+      .hero-line1,
+      .nowrap {
+        white-space: normal;
       }
 
-      .welding-end-copy {
-        left: 18px;
-        right: 18px;
-        top: 18px;
-        max-width: none;
+      .nowrap {
+        white-space: normal;
+      }
+
+      .jumbotron h2 {
+        font-size: clamp(2.2rem, 10vw, 5.3rem);
+        line-height: 1;
       }
       .container {
         width: min(calc(100% - 24px), var(--max));
       }
+
+      .welding-end-effect {
+        height: 180px;
+      }
+
+      .topbar {
+        backdrop-filter: blur(10px);
+      }
+
       .nav {
-        flex-wrap: wrap;
-        padding: 14px 0;
+        min-height: 64px;
+        gap: 10px;
+        padding: 10px 0;
+        align-items: center;
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+        font-size: 0.82rem;
+      }
+
+      .brand-text h1 {
+        font-size: 0.92rem;
+      }
+
+      .brand-text p {
+        display: none;
+      }
+
+      .nav-actions {
+        margin-left: auto;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .topbar .btn-primary {
+        display: none;
+      }
+
+      .language-switcher {
+        height: 40px;
+        min-width: 104px;
+        padding: 0 10px;
+        font-size: 0.82rem;
+      }
+
+      .btn {
+        padding: 10px 14px;
+        border-radius: 14px;
+        font-size: 0.86rem;
       }
 
       .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        z-index: 80;
+        flex-direction: column;
+        gap: 4px;
+        padding: 10px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(10,10,12,0.96);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links li {
         width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        display: block;
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .nav-links a:hover {
+        background: rgba(255,255,255,0.05);
       }
 
       .jumbotron h2 {
@@ -604,19 +777,34 @@
           <div class="brand-mark">IW</div>
           <div class="brand-text">
             <h1>IronSpark Welding</h1>
-            <p>Metal Fabrication & Repairs</p>
+            <p data-i18n="brand_subtitle">Metal Fabrication & Repairs</p>
           </div>
         </a>
 
-        <ul class="nav-links">
-          <li><a href="#services">Services</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#why-us">Why Us</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <ul class="nav-links" id="mainMenu">
+          <li><a href="#services" data-i18n="nav_services">Services</a></li>
+          <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+          <li><a href="#why-us" data-i18n="nav_why">Why Us</a></li>
+          <li><a href="#testimonials" data-i18n="nav_testimonials">Testimonials</a></li>
+          <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
         </ul>
 
-        <a class="btn btn-primary" href="#contact">Get a Quote</a>
+        <div class="nav-actions">
+          <select class="language-switcher" id="languageSwitcher" aria-label="Select language">
+            <option value="en">English</option>
+            <option value="pt">Português</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+          </select>
+          <a class="btn btn-primary" href="#contact" data-i18n="nav_cta">Get a Quote</a>
+          <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainMenu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M4 7h16"></path>
+              <path d="M4 12h16"></path>
+              <path d="M4 17h16"></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -625,18 +813,18 @@
         <div class="container">
           <div class="jumbotron reveal">
             <div class="jumbotron-inner">
-              <div class="eyebrow"><span></span> Welding and metal fabrication</div>
+              <div class="eyebrow"><span class="eyebrow-dot"></span><span data-i18n="hero_eyebrow">Welding and metal fabrication</span></div>
               <h2>
-                Strong work.<br />
-                <span class="accent nowrap">Simple process.</span><br />
-                <span class="nowrap">Serious results.</span>
+                <span class="hero-line1" data-i18n="hero_line1">Strong work.</span><br />
+                <span class="accent nowrap" data-i18n="hero_line2">Simple process.</span><br />
+                <span class="nowrap" data-i18n="hero_line3">Serious results.</span>
               </h2>
-              <p class="lead">
+              <p class="lead" data-i18n="hero_lead">
                 We provide professional welding, metal fabrication, and repair services for residential, commercial, and industrial projects. Clean finish, durable structure, and reliable execution from start to finish.
               </p>
               <div class="hero-actions">
-                <a class="btn btn-primary" href="#contact">Request Free Quote</a>
-                <a class="btn btn-secondary" href="#services">Explore Services</a>
+                <a class="btn btn-primary" href="#contact" data-i18n="hero_cta_primary">Request Free Quote</a>
+                <a class="btn btn-secondary" href="#services" data-i18n="hero_cta_secondary">Explore Services</a>
               </div>
             </div>
           </div>
@@ -646,28 +834,28 @@
       <section id="services">
         <div class="container">
           <div class="section-head reveal">
-            <div class="kicker">Services</div>
-            <h3>What we do</h3>
-            <p>A simple service section to clearly present the core value of your welding business.</p>
+            <div class="kicker" data-i18n="services_kicker">Services</div>
+            <h3 data-i18n="services_title">What we do</h3>
+            <p data-i18n="services_desc">A simple service section to clearly present the core value of your welding business.</p>
           </div>
 
           <div class="services-grid">
             <article class="card reveal">
               <div class="icon">⚙️</div>
-              <h4>Custom Fabrication</h4>
-              <p>Gates, railings, structures, frames, and custom metal solutions made to fit your exact needs.</p>
+              <h4 data-i18n="service1_title">Custom Fabrication</h4>
+              <p data-i18n="service1_desc">Gates, railings, structures, frames, and custom metal solutions made to fit your exact needs.</p>
             </article>
 
             <article class="card reveal">
               <div class="icon">🔥</div>
-              <h4>Welding Services</h4>
-              <p>MIG, TIG, and general welding work with a strong focus on durability, precision, and clean finishing.</p>
+              <h4 data-i18n="service2_title">Welding Services</h4>
+              <p data-i18n="service2_desc">MIG, TIG, and general welding work with a strong focus on durability, precision, and clean finishing.</p>
             </article>
 
             <article class="card reveal">
               <div class="icon">🛠️</div>
-              <h4>Repairs & Reinforcement</h4>
-              <p>Fast response for damaged components, structural reinforcement, and on-site repair work when needed.</p>
+              <h4 data-i18n="service3_title">Repairs & Reinforcement</h4>
+              <p data-i18n="service3_desc">Fast response for damaged components, structural reinforcement, and on-site repair work when needed.</p>
             </article>
           </div>
         </div>
@@ -676,28 +864,28 @@
       <section id="projects">
         <div class="container">
           <div class="section-head reveal">
-            <div class="kicker">Projects</div>
-            <h3>Some of the work we can deliver</h3>
-            <p>A simple projects section to showcase the quality, type, and range of your welding and fabrication work.</p>
+            <div class="kicker" data-i18n="projects_kicker">Projects</div>
+            <h3 data-i18n="projects_title">Some of the work we can deliver</h3>
+            <p data-i18n="projects_desc">A simple projects section to showcase the quality, type, and range of your welding and fabrication work.</p>
           </div>
 
           <div class="projects-grid">
             <article class="card project-card reveal">
-              <div class="project-tag">Commercial</div>
-              <h4>Steel Staircase Installation</h4>
-              <p>Custom-built staircase fabricated with a strong structure, clean welding, and a professional finish.</p>
+              <div class="project-tag" data-i18n="project1_tag">Commercial</div>
+              <h4 data-i18n="project1_title">Steel Staircase Installation</h4>
+              <p data-i18n="project1_desc">Custom-built staircase fabricated with a strong structure, clean welding, and a professional finish.</p>
             </article>
 
             <article class="card project-card reveal">
-              <div class="project-tag">Residential</div>
-              <h4>Security Gate Fabrication</h4>
-              <p>Durable custom metal gate designed for both protection and visual impact.</p>
+              <div class="project-tag" data-i18n="project2_tag">Residential</div>
+              <h4 data-i18n="project2_title">Security Gate Fabrication</h4>
+              <p data-i18n="project2_desc">Durable custom metal gate designed for both protection and visual impact.</p>
             </article>
 
             <article class="card project-card reveal">
-              <div class="project-tag">Industrial</div>
-              <h4>Pipe and Structure Repair</h4>
-              <p>Fast intervention for industrial repair work where safety, speed, and reliability matter.</p>
+              <div class="project-tag" data-i18n="project3_tag">Industrial</div>
+              <h4 data-i18n="project3_title">Pipe and Structure Repair</h4>
+              <p data-i18n="project3_desc">Fast intervention for industrial repair work where safety, speed, and reliability matter.</p>
             </article>
           </div>
         </div>
@@ -706,28 +894,28 @@
       <section id="why-us">
         <div class="container">
           <div class="section-head reveal">
-            <div class="kicker">Why choose us</div>
-            <h3>Why clients trust our work</h3>
-            <p>This section helps explain clearly why someone should choose your company instead of another workshop.</p>
+            <div class="kicker" data-i18n="why_kicker">Why choose us</div>
+            <h3 data-i18n="why_title">Why clients trust our work</h3>
+            <p data-i18n="why_desc">This section helps explain clearly why someone should choose your company instead of another workshop.</p>
           </div>
 
           <div class="why-grid">
             <article class="card why-card reveal">
               <div class="icon">✅</div>
-              <h4>Reliable quality</h4>
-              <p>We focus on strong welding, clean detail, and durable results that hold up over time.</p>
+              <h4 data-i18n="why1_title">Reliable quality</h4>
+              <p data-i18n="why1_desc">We focus on strong welding, clean detail, and durable results that hold up over time.</p>
             </article>
 
             <article class="card why-card reveal">
               <div class="icon">⏱️</div>
-              <h4>Fast response</h4>
-              <p>We work with clear deadlines and quick communication so your project keeps moving.</p>
+              <h4 data-i18n="why2_title">Fast response</h4>
+              <p data-i18n="why2_desc">We work with clear deadlines and quick communication so your project keeps moving.</p>
             </article>
 
             <article class="card why-card reveal">
               <div class="icon">🤝</div>
-              <h4>Professional service</h4>
-              <p>From quote to delivery, we keep the process simple, transparent, and client-focused.</p>
+              <h4 data-i18n="why3_title">Professional service</h4>
+              <p data-i18n="why3_desc">From quote to delivery, we keep the process simple, transparent, and client-focused.</p>
             </article>
           </div>
         </div>
@@ -736,28 +924,28 @@
       <section id="testimonials">
         <div class="container">
           <div class="section-head reveal">
-            <div class="kicker">Testimonials</div>
-            <h3>What clients say about us</h3>
-            <p>A testimonial section adds trust and helps new customers feel more confident about contacting you.</p>
+            <div class="kicker" data-i18n="testimonials_kicker">Testimonials</div>
+            <h3 data-i18n="testimonials_title">What clients say about us</h3>
+            <p data-i18n="testimonials_desc">A testimonial section adds trust and helps new customers feel more confident about contacting you.</p>
           </div>
 
           <div class="testimonials-grid">
             <article class="card testimonial-card reveal">
-              <h4>Excellent workmanship</h4>
-              <p>The final result was strong, clean, and exactly what we needed. Very professional from start to finish.</p>
-              <div class="testimonial-name">Michael Turner<span class="testimonial-role">Site Manager</span></div>
+              <h4 data-i18n="testimonial1_title">Excellent workmanship</h4>
+              <p data-i18n="testimonial1_desc">The final result was strong, clean, and exactly what we needed. Very professional from start to finish.</p>
+              <div class="testimonial-name">Michael Turner<span class="testimonial-role" data-i18n="testimonial1_role">Site Manager</span></div>
             </article>
 
             <article class="card testimonial-card reveal">
-              <h4>Very reliable team</h4>
-              <p>They respected the deadline, explained everything clearly, and delivered a really solid metal structure.</p>
-              <div class="testimonial-name">Sarah Lopez<span class="testimonial-role">Homeowner</span></div>
+              <h4 data-i18n="testimonial2_title">Very reliable team</h4>
+              <p data-i18n="testimonial2_desc">They respected the deadline, explained everything clearly, and delivered a really solid metal structure.</p>
+              <div class="testimonial-name">Sarah Lopez<span class="testimonial-role" data-i18n="testimonial2_role">Homeowner</span></div>
             </article>
 
             <article class="card testimonial-card reveal">
-              <h4>Fast and professional</h4>
-              <p>We needed an urgent repair and they handled it quickly, safely, and with great attention to detail.</p>
-              <div class="testimonial-name">Daniel Brooks<span class="testimonial-role">Factory Supervisor</span></div>
+              <h4 data-i18n="testimonial3_title">Fast and professional</h4>
+              <p data-i18n="testimonial3_desc">We needed an urgent repair and they handled it quickly, safely, and with great attention to detail.</p>
+              <div class="testimonial-name">Daniel Brooks<span class="testimonial-role" data-i18n="testimonial3_role">Factory Supervisor</span></div>
             </article>
           </div>
         </div>
@@ -766,52 +954,52 @@
       <section id="contact">
         <div class="container contact-grid">
           <div class="contact-box reveal">
-            <div class="kicker">Contact</div>
-            <h3>Let’s talk about your project</h3>
-            <p>Send your request and we will get back to you with a practical solution and a clear quote.</p>
+            <div class="kicker" data-i18n="contact_kicker">Contact</div>
+            <h3 data-i18n="contact_title">Let’s talk about your project</h3>
+            <p data-i18n="contact_desc">Send your request and we will get back to you with a practical solution and a clear quote.</p>
 
             <div class="contact-items">
               <div class="contact-item">
-                <strong>Phone</strong>
+                <strong data-i18n="contact_phone_label">Phone</strong>
                 <span>+351 912 345 678</span>
               </div>
               <div class="contact-item">
-                <strong>Email</strong>
+                <strong data-i18n="contact_email_label">Email</strong>
                 <span>info@ironsparkwelding.com</span>
               </div>
               <div class="contact-item">
-                <strong>Location</strong>
-                <span>Lisbon, Portugal</span>
+                <strong data-i18n="contact_location_label">Location</strong>
+                <span data-i18n="contact_location_value">Lisbon, Portugal</span>
               </div>
             </div>
           </div>
 
           <div class="form-box reveal">
-            <div class="kicker">Request a quote</div>
-            <h3>Contact form</h3>
+            <div class="kicker" data-i18n="form_kicker">Request a quote</div>
+            <h3 data-i18n="form_title">Contact form</h3>
             <form id="quoteForm">
               <div class="form-row">
                 <div class="field">
-                  <label for="name">Name</label>
-                  <input id="name" type="text" placeholder="Your name" required />
+                  <label for="name" data-i18n="form_name">Name</label>
+                  <input id="name" type="text" placeholder="Your name" data-i18n-placeholder="form_name_placeholder" required />
                 </div>
                 <div class="field">
-                  <label for="phone">Phone</label>
-                  <input id="phone" type="tel" placeholder="Your phone" required />
+                  <label for="phone" data-i18n="form_phone">Phone</label>
+                  <input id="phone" type="tel" placeholder="Your phone" data-i18n-placeholder="form_phone_placeholder" required />
                 </div>
               </div>
 
               <div class="field">
-                <label for="email">Email</label>
-                <input id="email" type="email" placeholder="Your email" required />
+                <label for="email" data-i18n="form_email">Email</label>
+                <input id="email" type="email" placeholder="Your email" data-i18n-placeholder="form_email_placeholder" required />
               </div>
 
               <div class="field">
-                <label for="message">Project details</label>
-                <textarea id="message" placeholder="Tell us about the work you need..." required></textarea>
+                <label for="message" data-i18n="form_message">Project details</label>
+                <textarea id="message" placeholder="Tell us about the work you need..." data-i18n-placeholder="form_message_placeholder" required></textarea>
               </div>
 
-              <button type="submit" class="btn btn-primary">Send Request</button>
+              <button type="submit" class="btn btn-primary" data-i18n="form_submit">Send Request</button>
             </form>
           </div>
         </div>
@@ -824,15 +1012,389 @@
 
     <footer class="footer">
       <div class="container footer-inner">
-        <p>© 2026 IronSpark Welding. All rights reserved.</p>
-        <p>Industrial Welding • Fabrication • Repairs</p>
+        <p data-i18n="footer_copy">© 2026 IronSpark Welding. All rights reserved.</p>
+        <p data-i18n="footer_tags">Industrial Welding • Fabrication • Repairs</p>
       </div>
     </footer>
   </div>
 
-  <div class="toast" id="toast">Thanks — your quote request has been captured.</div>
+  <div class="toast" id="toast" data-i18n="toast_success">Thanks — your quote request has been captured.</div>
 
   <script>
+    const translations = {
+      en: {
+        brand_subtitle: "Metal Fabrication & Repairs",
+        nav_services: "Services",
+        nav_projects: "Projects",
+        nav_why: "Why Us",
+        nav_testimonials: "Testimonials",
+        nav_contact: "Contact",
+        nav_cta: "Get a Quote",
+        hero_eyebrow: "Welding and metal fabrication",
+        hero_line1: "Strong work.",
+        hero_line2: "Simple process.",
+        hero_line3: "Serious results.",
+        hero_lead: "We provide professional welding, metal fabrication, and repair services for residential, commercial, and industrial projects. Clean finish, durable structure, and reliable execution from start to finish.",
+        hero_cta_primary: "Request Free Quote",
+        hero_cta_secondary: "Explore Services",
+        services_kicker: "Services",
+        services_title: "What we do",
+        services_desc: "A simple service section to clearly present the core value of your welding business.",
+        service1_title: "Custom Fabrication",
+        service1_desc: "Gates, railings, structures, frames, and custom metal solutions made to fit your exact needs.",
+        service2_title: "Welding Services",
+        service2_desc: "MIG, TIG, and general welding work with a strong focus on durability, precision, and clean finishing.",
+        service3_title: "Repairs & Reinforcement",
+        service3_desc: "Fast response for damaged components, structural reinforcement, and on-site repair work when needed.",
+        projects_kicker: "Projects",
+        projects_title: "Some of the work we can deliver",
+        projects_desc: "A simple projects section to showcase the quality, type, and range of your welding and fabrication work.",
+        project1_tag: "Commercial",
+        project1_title: "Steel Staircase Installation",
+        project1_desc: "Custom-built staircase fabricated with a strong structure, clean welding, and a professional finish.",
+        project2_tag: "Residential",
+        project2_title: "Security Gate Fabrication",
+        project2_desc: "Durable custom metal gate designed for both protection and visual impact.",
+        project3_tag: "Industrial",
+        project3_title: "Pipe and Structure Repair",
+        project3_desc: "Fast intervention for industrial repair work where safety, speed, and reliability matter.",
+        why_kicker: "Why choose us",
+        why_title: "Why clients trust our work",
+        why_desc: "This section helps explain clearly why someone should choose your company instead of another workshop.",
+        why1_title: "Reliable quality",
+        why1_desc: "We focus on strong welding, clean detail, and durable results that hold up over time.",
+        why2_title: "Fast response",
+        why2_desc: "We work with clear deadlines and quick communication so your project keeps moving.",
+        why3_title: "Professional service",
+        why3_desc: "From quote to delivery, we keep the process simple, transparent, and client-focused.",
+        testimonials_kicker: "Testimonials",
+        testimonials_title: "What clients say about us",
+        testimonials_desc: "A testimonial section adds trust and helps new customers feel more confident about contacting you.",
+        testimonial1_title: "Excellent workmanship",
+        testimonial1_desc: "The final result was strong, clean, and exactly what we needed. Very professional from start to finish.",
+        testimonial1_role: "Site Manager",
+        testimonial2_title: "Very reliable team",
+        testimonial2_desc: "They respected the deadline, explained everything clearly, and delivered a really solid metal structure.",
+        testimonial2_role: "Homeowner",
+        testimonial3_title: "Fast and professional",
+        testimonial3_desc: "We needed an urgent repair and they handled it quickly, safely, and with great attention to detail.",
+        testimonial3_role: "Factory Supervisor",
+        contact_kicker: "Contact",
+        contact_title: "Let’s talk about your project",
+        contact_desc: "Send your request and we will get back to you with a practical solution and a clear quote.",
+        contact_phone_label: "Phone",
+        contact_email_label: "Email",
+        contact_location_label: "Location",
+        contact_location_value: "Lisbon, Portugal",
+        form_kicker: "Request a quote",
+        form_title: "Contact form",
+        form_name: "Name",
+        form_name_placeholder: "Your name",
+        form_phone: "Phone",
+        form_phone_placeholder: "Your phone",
+        form_email: "Email",
+        form_email_placeholder: "Your email",
+        form_message: "Project details",
+        form_message_placeholder: "Tell us about the work you need...",
+        form_submit: "Send Request",
+        footer_copy: "© 2026 IronSpark Welding. All rights reserved.",
+        footer_tags: "Industrial Welding • Fabrication • Repairs",
+        toast_success: "Thanks — your quote request has been captured."
+      },
+      pt: {
+        brand_subtitle: "Fabricação Metálica e Reparações",
+        nav_services: "Serviços",
+        nav_projects: "Projetos",
+        nav_why: "Porque nós",
+        nav_testimonials: "Testemunhos",
+        nav_contact: "Contacto",
+        nav_cta: "Pedir orçamento",
+        hero_eyebrow: "Soldadura e fabricação metálica",
+        hero_line1: "Trabalho sólido.",
+        hero_line2: "Processo simples.",
+        hero_line3: "Resultados sérios.",
+        hero_lead: "Prestamos serviços profissionais de soldadura, fabricação metálica e reparação para projetos residenciais, comerciais e industriais. Acabamento limpo, estrutura durável e execução fiável do início ao fim.",
+        hero_cta_primary: "Pedir orçamento grátis",
+        hero_cta_secondary: "Ver serviços",
+        services_kicker: "Serviços",
+        services_title: "O que fazemos",
+        services_desc: "Uma secção simples para apresentar claramente o valor principal da tua empresa de soldadura.",
+        service1_title: "Fabricação à medida",
+        service1_desc: "Portões, grades, estruturas, caixilharias e soluções metálicas personalizadas feitas à medida das tuas necessidades.",
+        service2_title: "Serviços de soldadura",
+        service2_desc: "Soldadura MIG, TIG e geral com forte foco na durabilidade, precisão e acabamento limpo.",
+        service3_title: "Reparações e reforço",
+        service3_desc: "Resposta rápida para componentes danificados, reforço estrutural e reparações no local quando necessário.",
+        projects_kicker: "Projetos",
+        projects_title: "Alguns dos trabalhos que podemos entregar",
+        projects_desc: "Uma secção simples de projetos para mostrar a qualidade, o tipo e a variedade do teu trabalho de soldadura e fabricação.",
+        project1_tag: "Comercial",
+        project1_title: "Instalação de escada metálica",
+        project1_desc: "Escada feita por medida com estrutura forte, soldadura limpa e acabamento profissional.",
+        project2_tag: "Residencial",
+        project2_title: "Fabricação de portão de segurança",
+        project2_desc: "Portão metálico resistente desenhado tanto para proteção como para impacto visual.",
+        project3_tag: "Industrial",
+        project3_title: "Reparação de tubagem e estrutura",
+        project3_desc: "Intervenção rápida para reparações industriais onde segurança, rapidez e fiabilidade são essenciais.",
+        why_kicker: "Porque escolher-nos",
+        why_title: "Porque os clientes confiam no nosso trabalho",
+        why_desc: "Esta secção ajuda a explicar claramente porque alguém deve escolher a tua empresa em vez de outra oficina.",
+        why1_title: "Qualidade fiável",
+        why1_desc: "Focamo-nos em soldadura forte, detalhe limpo e resultados duráveis que se mantêm ao longo do tempo.",
+        why2_title: "Resposta rápida",
+        why2_desc: "Trabalhamos com prazos claros e comunicação rápida para manter o teu projeto em andamento.",
+        why3_title: "Serviço profissional",
+        why3_desc: "Do orçamento à entrega, mantemos o processo simples, transparente e focado no cliente.",
+        testimonials_kicker: "Testemunhos",
+        testimonials_title: "O que os clientes dizem sobre nós",
+        testimonials_desc: "Uma secção de testemunhos acrescenta confiança e ajuda novos clientes a sentirem-se mais seguros para entrar em contacto.",
+        testimonial1_title: "Excelente execução",
+        testimonial1_desc: "O resultado final ficou forte, limpo e exatamente como precisávamos. Muito profissional do início ao fim.",
+        testimonial1_role: "Gestor de obra",
+        testimonial2_title: "Equipa muito fiável",
+        testimonial2_desc: "Cumpriram o prazo, explicaram tudo com clareza e entregaram uma estrutura metálica realmente sólida.",
+        testimonial2_role: "Proprietária",
+        testimonial3_title: "Rápidos e profissionais",
+        testimonial3_desc: "Precisávamos de uma reparação urgente e trataram de tudo rapidamente, com segurança e grande atenção ao detalhe.",
+        testimonial3_role: "Supervisor de fábrica",
+        contact_kicker: "Contacto",
+        contact_title: "Vamos falar sobre o teu projeto",
+        contact_desc: "Envia o teu pedido e entraremos em contacto com uma solução prática e um orçamento claro.",
+        contact_phone_label: "Telefone",
+        contact_email_label: "Email",
+        contact_location_label: "Localização",
+        contact_location_value: "Lisboa, Portugal",
+        form_kicker: "Pedir orçamento",
+        form_title: "Formulário de contacto",
+        form_name: "Nome",
+        form_name_placeholder: "O teu nome",
+        form_phone: "Telefone",
+        form_phone_placeholder: "O teu telefone",
+        form_email: "Email",
+        form_email_placeholder: "O teu email",
+        form_message: "Detalhes do projeto",
+        form_message_placeholder: "Fala-nos do trabalho de que precisas...",
+        form_submit: "Enviar pedido",
+        footer_copy: "© 2026 IronSpark Welding. Todos os direitos reservados.",
+        footer_tags: "Soldadura Industrial • Fabricação • Reparações",
+        toast_success: "Obrigado — o teu pedido de orçamento foi registado."
+      },
+      es: {
+        brand_subtitle: "Fabricación Metálica y Reparaciones",
+        nav_services: "Servicios",
+        nav_projects: "Proyectos",
+        nav_why: "Por qué nosotros",
+        nav_testimonials: "Testimonios",
+        nav_contact: "Contacto",
+        nav_cta: "Pedir presupuesto",
+        hero_eyebrow: "Soldadura y fabricación metálica",
+        hero_line1: "Trabajo sólido.",
+        hero_line2: "Proceso simple.",
+        hero_line3: "Resultados serios.",
+        hero_lead: "Ofrecemos servicios profesionales de soldadura, fabricación metálica y reparación para proyectos residenciales, comerciales e industriales. Acabado limpio, estructura duradera y ejecución fiable de principio a fin.",
+        hero_cta_primary: "Solicitar presupuesto gratis",
+        hero_cta_secondary: "Ver servicios",
+        services_kicker: "Servicios",
+        services_title: "Qué hacemos",
+        services_desc: "Una sección simple para presentar claramente el valor principal de tu empresa de soldadura.",
+        service1_title: "Fabricación a medida",
+        service1_desc: "Puertas, barandillas, estructuras, marcos y soluciones metálicas personalizadas hechas para tus necesidades exactas.",
+        service2_title: "Servicios de soldadura",
+        service2_desc: "Soldadura MIG, TIG y general con un fuerte enfoque en la durabilidad, la precisión y el acabado limpio.",
+        service3_title: "Reparaciones y refuerzo",
+        service3_desc: "Respuesta rápida para componentes dañados, refuerzo estructural y trabajos de reparación in situ cuando sea necesario.",
+        projects_kicker: "Proyectos",
+        projects_title: "Algunos de los trabajos que podemos realizar",
+        projects_desc: "Una sección simple de proyectos para mostrar la calidad, el tipo y el alcance de tu trabajo de soldadura y fabricación.",
+        project1_tag: "Comercial",
+        project1_title: "Instalación de escalera metálica",
+        project1_desc: "Escalera hecha a medida con una estructura sólida, soldadura limpia y acabado profesional.",
+        project2_tag: "Residencial",
+        project2_title: "Fabricación de puerta de seguridad",
+        project2_desc: "Puerta metálica resistente diseñada tanto para protección como para impacto visual.",
+        project3_tag: "Industrial",
+        project3_title: "Reparación de tuberías y estructura",
+        project3_desc: "Intervención rápida para trabajos de reparación industrial donde la seguridad, la rapidez y la fiabilidad son esenciales.",
+        why_kicker: "Por qué elegirnos",
+        why_title: "Por qué los clientes confían en nuestro trabajo",
+        why_desc: "Esta sección ayuda a explicar claramente por qué alguien debería elegir tu empresa en lugar de otro taller.",
+        why1_title: "Calidad fiable",
+        why1_desc: "Nos centramos en una soldadura fuerte, detalles limpios y resultados duraderos que resisten el paso del tiempo.",
+        why2_title: "Respuesta rápida",
+        why2_desc: "Trabajamos con plazos claros y comunicación rápida para que tu proyecto siga avanzando.",
+        why3_title: "Servicio profesional",
+        why3_desc: "Desde el presupuesto hasta la entrega, mantenemos el proceso simple, transparente y centrado en el cliente.",
+        testimonials_kicker: "Testimonios",
+        testimonials_title: "Lo que dicen nuestros clientes",
+        testimonials_desc: "Una sección de testimonios añade confianza y ayuda a que los nuevos clientes se sientan más seguros al contactarte.",
+        testimonial1_title: "Excelente trabajo",
+        testimonial1_desc: "El resultado final fue sólido, limpio y exactamente lo que necesitábamos. Muy profesional de principio a fin.",
+        testimonial1_role: "Jefe de obra",
+        testimonial2_title: "Equipo muy fiable",
+        testimonial2_desc: "Respetaron el plazo, explicaron todo claramente y entregaron una estructura metálica realmente sólida.",
+        testimonial2_role: "Propietaria",
+        testimonial3_title: "Rápidos y profesionales",
+        testimonial3_desc: "Necesitábamos una reparación urgente y la resolvieron rápidamente, con seguridad y gran atención al detalle.",
+        testimonial3_role: "Supervisor de fábrica",
+        contact_kicker: "Contacto",
+        contact_title: "Hablemos de tu proyecto",
+        contact_desc: "Envía tu solicitud y te responderemos con una solución práctica y un presupuesto claro.",
+        contact_phone_label: "Teléfono",
+        contact_email_label: "Correo electrónico",
+        contact_location_label: "Ubicación",
+        contact_location_value: "Lisboa, Portugal",
+        form_kicker: "Solicitar presupuesto",
+        form_title: "Formulario de contacto",
+        form_name: "Nombre",
+        form_name_placeholder: "Tu nombre",
+        form_phone: "Teléfono",
+        form_phone_placeholder: "Tu teléfono",
+        form_email: "Correo electrónico",
+        form_email_placeholder: "Tu correo electrónico",
+        form_message: "Detalles del proyecto",
+        form_message_placeholder: "Cuéntanos qué trabajo necesitas...",
+        form_submit: "Enviar solicitud",
+        footer_copy: "© 2026 IronSpark Welding. Todos los derechos reservados.",
+        footer_tags: "Soldadura Industrial • Fabricación • Reparaciones",
+        toast_success: "Gracias — tu solicitud de presupuesto ha sido registrada."
+      },
+      fr: {
+        brand_subtitle: "Fabrication Métallique et Réparations",
+        nav_services: "Services",
+        nav_projects: "Projets",
+        nav_why: "Pourquoi nous",
+        nav_testimonials: "Témoignages",
+        nav_contact: "Contact",
+        nav_cta: "Demander un devis",
+        hero_eyebrow: "Soudure et fabrication métallique",
+        hero_line1: "Travail solide.",
+        hero_line2: "Processus simple.",
+        hero_line3: "Résultats sérieux.",
+        hero_lead: "Nous proposons des services professionnels de soudure, de fabrication métallique et de réparation pour des projets résidentiels, commerciaux et industriels. Finition propre, structure durable et exécution fiable du début à la fin.",
+        hero_cta_primary: "Demander un devis gratuit",
+        hero_cta_secondary: "Voir les services",
+        services_kicker: "Services",
+        services_title: "Ce que nous faisons",
+        services_desc: "Une section simple pour présenter clairement la valeur principale de votre entreprise de soudure.",
+        service1_title: "Fabrication sur mesure",
+        service1_desc: "Portails, garde-corps, structures, cadres et solutions métalliques sur mesure adaptées à vos besoins exacts.",
+        service2_title: "Services de soudure",
+        service2_desc: "Soudure MIG, TIG et générale avec un fort accent sur la durabilité, la précision et une finition propre.",
+        service3_title: "Réparations et renforcement",
+        service3_desc: "Réponse rapide pour les composants endommagés, le renforcement structurel et les réparations sur site lorsque nécessaire.",
+        projects_kicker: "Projets",
+        projects_title: "Quelques travaux que nous pouvons réaliser",
+        projects_desc: "Une section simple de projets pour présenter la qualité, le type et l’étendue de votre travail de soudure et de fabrication.",
+        project1_tag: "Commercial",
+        project1_title: "Installation d’escalier métallique",
+        project1_desc: "Escalier fabriqué sur mesure avec une structure solide, une soudure propre et une finition professionnelle.",
+        project2_tag: "Résidentiel",
+        project2_title: "Fabrication de portail de sécurité",
+        project2_desc: "Portail métallique durable conçu à la fois pour la protection et l’impact visuel.",
+        project3_tag: "Industriel",
+        project3_title: "Réparation de tuyauterie et structure",
+        project3_desc: "Intervention rapide pour les réparations industrielles où la sécurité, la rapidité et la fiabilité sont essentielles.",
+        why_kicker: "Pourquoi nous choisir",
+        why_title: "Pourquoi les clients font confiance à notre travail",
+        why_desc: "Cette section aide à expliquer clairement pourquoi quelqu’un devrait choisir votre entreprise plutôt qu’un autre atelier.",
+        why1_title: "Qualité fiable",
+        why1_desc: "Nous nous concentrons sur une soudure solide, des détails propres et des résultats durables qui tiennent dans le temps.",
+        why2_title: "Réponse rapide",
+        why2_desc: "Nous travaillons avec des délais clairs et une communication rapide pour que votre projet continue d’avancer.",
+        why3_title: "Service professionnel",
+        why3_desc: "Du devis à la livraison, nous gardons le processus simple, transparent et centré sur le client.",
+        testimonials_kicker: "Témoignages",
+        testimonials_title: "Ce que disent nos clients",
+        testimonials_desc: "Une section témoignages renforce la confiance et aide les nouveaux clients à se sentir plus à l’aise pour vous contacter.",
+        testimonial1_title: "Excellente réalisation",
+        testimonial1_desc: "Le résultat final était solide, propre et exactement ce qu’il nous fallait. Très professionnel du début à la fin.",
+        testimonial1_role: "Chef de chantier",
+        testimonial2_title: "Équipe très fiable",
+        testimonial2_desc: "Ils ont respecté le délai, tout expliqué clairement et livré une structure métallique vraiment solide.",
+        testimonial2_role: "Propriétaire",
+        testimonial3_title: "Rapides et professionnels",
+        testimonial3_desc: "Nous avions besoin d’une réparation urgente et ils l’ont gérée rapidement, en toute sécurité et avec beaucoup de soin.",
+        testimonial3_role: "Superviseur d’usine",
+        contact_kicker: "Contact",
+        contact_title: "Parlons de votre projet",
+        contact_desc: "Envoyez votre demande et nous reviendrons vers vous avec une solution pratique et un devis clair.",
+        contact_phone_label: "Téléphone",
+        contact_email_label: "Email",
+        contact_location_label: "Localisation",
+        contact_location_value: "Lisbonne, Portugal",
+        form_kicker: "Demander un devis",
+        form_title: "Formulaire de contact",
+        form_name: "Nom",
+        form_name_placeholder: "Votre nom",
+        form_phone: "Téléphone",
+        form_phone_placeholder: "Votre téléphone",
+        form_email: "Email",
+        form_email_placeholder: "Votre email",
+        form_message: "Détails du projet",
+        form_message_placeholder: "Parlez-nous du travail dont vous avez besoin...",
+        form_submit: "Envoyer la demande",
+        footer_copy: "© 2026 IronSpark Welding. Tous droits réservés.",
+        footer_tags: "Soudure Industrielle • Fabrication • Réparations",
+        toast_success: "Merci — votre demande de devis a bien été enregistrée."
+      }
+    };
+
+    const languageSwitcher = document.getElementById('languageSwitcher');
+
+    function applyLanguage(lang) {
+      const dict = translations[lang] || translations.en;
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.dataset.i18nPlaceholder;
+        if (dict[key]) {
+          el.placeholder = dict[key];
+        }
+      });
+
+      localStorage.setItem('siteLanguage', lang);
+    }
+
+    const savedLanguage = localStorage.getItem('siteLanguage') || 'en';
+    languageSwitcher.value = savedLanguage;
+    applyLanguage(savedLanguage);
+
+    languageSwitcher.addEventListener('change', (e) => {
+      applyLanguage(e.target.value);
+    });
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mainMenu = document.getElementById('mainMenu');
+
+    if (menuToggle && mainMenu) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = mainMenu.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      mainMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mainMenu.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 760) {
+          mainMenu.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
     const revealItems = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -851,6 +1413,7 @@
     if (form && toast) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
+        toast.textContent = translations[languageSwitcher.value]?.toast_success || translations.en.toast_success;
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2400);
         form.reset();
